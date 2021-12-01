@@ -1,0 +1,45 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+
+PortSystem       1.0
+
+name             connor
+version          1.2.0
+revision         0
+
+categories       devel
+license          Apache-2
+maintainers      @helpermethod
+platforms        darwin
+supported_archs  x86_64
+
+description      A commandline tool for resetting Kafka Connect source connector offsets.
+long_description A commandline tool for resetting Kafka Connect source connector offsets.
+
+homepage         https://github.com/helpermethod/connor
+
+master_sites     https://github.com/helpermethod/connor/releases/download/v${version}/
+use_zip          yes
+
+checksums        rmd160 ff61d45a9a7b2197ac86e1d7c152a01a4a640046 \
+                 sha256 a3c4f5701bee1f56a25cf11f70d6449ff34691ad499ea8b5baaba12328acb719 \
+                 size   14158442
+
+use_configure    no
+
+build {}
+
+destroot {
+    set target ${destroot}${prefix}/share/${name}
+
+    # Create the target directory
+    xinstall -m 755 -d ${target}
+
+    # Copy over the needed elements of our directory tree
+    foreach d { bin } {
+        copy ${worksrcpath}/${d} ${target}
+    }
+
+    ln -s ../share/${name}/bin/connor ${destroot}${prefix}/bin/connor
+}
+
+livecheck.type   none
