@@ -1,9 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# Generated with JReleaser 0.10.0 at 2022-01-06T20:53:59.485454061Z
 
 PortSystem       1.0
 
 name             connor
-version          1.2.0
+version          1.2.1
 revision         0
 
 categories       devel
@@ -17,12 +18,13 @@ long_description A commandline tool for resetting Kafka Connect source connector
 
 homepage         https://github.com/helpermethod/connor
 
-master_sites     https://github.com/helpermethod/connor/releases/download/v${version}/
+master_sites     https://github.com/helpermethod/connor/releases/download/v${version}
+distname         ${name}-${version}-osx-x86_64
 use_zip          yes
 
-checksums        rmd160 ff61d45a9a7b2197ac86e1d7c152a01a4a640046 \
-                 sha256 a3c4f5701bee1f56a25cf11f70d6449ff34691ad499ea8b5baaba12328acb719 \
-                 size   14158442
+checksums        rmd160 7cf97991f87bea8c883cdc8967848583e2efddcd \
+                 sha256 e18acd0bc4ef29d24702545be4e2b4fb5853c967852420b4b943ba6fbf0afd5a \
+                 size   14158946
 
 use_configure    no
 
@@ -35,8 +37,8 @@ destroot {
     xinstall -m 755 -d ${target}
 
     # Copy over the needed elements of our directory tree
-    foreach d { bin } {
-        copy ${worksrcpath}/${d} ${target}
+    foreach f [glob -dir ${worksrcpath} *] {
+        copy ${f} ${target}
     }
 
     ln -s ../share/${name}/bin/connor ${destroot}${prefix}/bin/connor
