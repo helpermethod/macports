@@ -1,10 +1,10 @@
 # -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
-# Generated with JReleaser 0.10.0 at 2022-01-06T20:53:59.485454061Z
+# Generated with JReleaser 1.2.0 at 2022-10-26T09:15:12.919251778Z
 
 PortSystem       1.0
 
 name             connor
-version          1.2.1
+version          1.4.1
 revision         0
 
 categories       devel
@@ -22,9 +22,9 @@ master_sites     https://github.com/helpermethod/connor/releases/download/v${ver
 distname         ${name}-${version}-osx-x86_64
 use_zip          yes
 
-checksums        rmd160 7cf97991f87bea8c883cdc8967848583e2efddcd \
-                 sha256 e18acd0bc4ef29d24702545be4e2b4fb5853c967852420b4b943ba6fbf0afd5a \
-                 size   14158946
+checksums        rmd160 35d5bba620e0612733b2b229c1c072d85aa9d778 \
+                 sha256 a8ba17e7f19a00771e01839ea1cafb21a29e6d13ad2ffe0901bff8fa146b9fd5 \
+                 size   14511235
 
 use_configure    no
 
@@ -37,9 +37,7 @@ destroot {
     xinstall -m 755 -d ${target}
 
     # Copy over the needed elements of our directory tree
-    foreach f [glob -dir ${worksrcpath} *] {
-        copy ${f} ${target}
-    }
+    copy {*}[glob -dir ${worksrcpath} *] ${target}
 
     ln -s ../share/${name}/bin/connor ${destroot}${prefix}/bin/connor
 }
